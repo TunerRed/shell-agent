@@ -1,0 +1,73 @@
+server:
+  port: 8189
+#  servlet:
+#    context-path: /api
+
+spring:
+  datasource:
+    username: root
+    password: password
+    url: jdbc:mysql://localhost:3306/regulation?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      # 单个文件的最大值
+      max-file-size: 100MB
+      # 上传文件总的最大值
+      max-request-size: -1
+
+# ------------ 本机配置 ----------------
+# 使用-D设置的话其他用户会看到进程信息，请注意
+local:
+  # 将本机也视作一台远程主机，所以需要用户名密码
+  url: localhost
+  username: test
+  password: Y0dGemMzZHZjbVE9
+  # 配置本地的一些路径
+  path:
+    shell: shell
+
+gateway.whitelist: /test/**,/common/**,/backdoor/**
+
+
+# ------------------ SQL ------------------
+# sql
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.shellagent.entity
+#showSql
+logging:
+  level:
+    org:
+      shellagent:
+        service: debug
+        config: debug
+
+
+
+# ---------------- 加密 ----------------
+##jwt配置
+token:
+  config:
+    # 密钥
+    secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+    # JWT的签发主体，存入issuer
+    iss: deployServer
+    # 过期时间，时间戳
+    # expiresSecond: 259200
+    expiresSeconds: 0
+    expiresMinutes: 100
+
+
+
+
+# -------------- 忘了干嘛的了，应该是actuator -------------------
+# INFO ENDPOINT CONFIGURATION
+info:
+  app:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    encoding: @project.build.sourceEncoding@
+    java:
+      version: @java.version@

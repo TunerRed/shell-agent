@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 表字段与数据库冲突时，需要加 `cloumn` 来进行区分，否则会报错 -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--自动实现Serializable接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库基本信息-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/regulation?characterEncoding=UTF-8&amp;serverTimezone=UTC"
+                        userId="root"
+                        password="password">
+        </jdbcConnection>
+
+        <!--生成实体类的位置以及包的名字-->
+        <javaModelGenerator targetPackage="org.shellagent.entity"
+                            targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--生成xml映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置,mapper接口生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.shellagent.mapper" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成对应表及类名，始终添加 "`" 符号-->
+        <!-- tableName="deploy_properties"  domainObjectName="Property" delimitAllColumns="true"></table>
+        <table tableName="deploy_repository"  domainObjectName="Repo" delimitAllColumns="true"></table-->
+        <!--table tableName="deploy_history"  domainObjectName="History" delimitAllColumns="true"></table-->
+<!--        <table tableName="deploy_service_args"  domainObjectName="ServiceArgs" delimitAllColumns="true"></table>-->
+        <table tableName="deploy_users"  domainObjectName="User" delimitAllColumns="true"></table>
+
+    </context>
+
+</generatorConfiguration>
