@@ -6,8 +6,8 @@ server:
 spring:
   datasource:
     username: root
-    password: password
-    url: jdbc:mysql://localhost:3306/regulation?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: localhost3306
+    url: jdbc:mysql://127.0.0.1:3306/regulation?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
@@ -27,7 +27,17 @@ local:
   path:
     shell: shell
 
-gateway.whitelist: /test/**,/common/**,/backdoor/**
+gateway:
+  whitelist: /test/**,/common/**,/backdoor/**,/cos/**
+
+cos:
+  secretid: tencent-cos-secret-id
+  secretkey: tencent-cos-secret-key
+  origin: ap-nanjing
+  bucket:
+    name: tencent-cos-bucket-name
+    path: .
+  localpath: F:\workspace\DEV\cos\
 
 
 # ------------------ SQL ------------------
@@ -42,6 +52,8 @@ logging:
       shellagent:
         service: debug
         config: debug
+        controller: debug
+        utils: debug
 
 
 
@@ -58,16 +70,13 @@ token:
     expiresSeconds: 0
     expiresMinutes: 100
 
-
-
-
 # -------------- 忘了干嘛的了，应该是actuator -------------------
 # INFO ENDPOINT CONFIGURATION
-info:
-  app:
-    name: @project.name@
-    description: @project.description@
-    version: @project.version@
-    encoding: @project.build.sourceEncoding@
-    java:
-      version: @java.version@
+#info:
+#  app:
+#    name: @project.name@
+#    description: @project.description@
+#    version: @project.version@
+#    encoding: @project.build.sourceEncoding@
+#    java:
+#      version: @java.version@

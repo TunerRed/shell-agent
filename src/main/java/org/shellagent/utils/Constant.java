@@ -57,4 +57,8 @@ public class Constant {
         public static final String
             ROOT_USER = "1";
     }
+//    public class CosArgs {
+//        public static final String
+//            COS_PATH = "/tmp/cosfile/";
+//    }
 }

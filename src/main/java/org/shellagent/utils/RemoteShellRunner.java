@@ -2,6 +2,7 @@ package org.shellagent.utils;
 
 import ch.ethz.ssh2.ChannelCondition;
 import org.jetbrains.annotations.NotNull;
+import org.shellagent.dto.ShellDTO;
 import org.shellagent.entity.Property;
 import org.shellagent.exception.MyException;
 import org.shellagent.services.PropertyService;
@@ -38,6 +39,10 @@ public class RemoteShellRunner {
 
     public RemoteShellRunner(String host, String username, String password) throws MyException {
         this.init(host, username, password);
+    }
+    public RemoteShellRunner(ShellDTO shellDTO) throws MyException {
+        // TODO 查询数据库获取port和password
+        this.init(shellDTO.getIp(), shellDTO.getUsername(), password);
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.shellagent.config;
 
+import org.shellagent.utils.CosFTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport{
     private EchoApi echoApi;
     @Value("${gateway.whitelist}")
     private ArrayList<String> whitelist;
+    @Autowired
+    private CosFTP cosFTP;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,6 +36,12 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport{
         logger.debug("Configuration add: echoApi");
         registry.addInterceptor(echoApi).addPathPatterns("/**");
 
+        init();
+
         super.addInterceptors(registry);
+    }
+
+    private void init() {
+        cosFTP.init();
     }
 }
